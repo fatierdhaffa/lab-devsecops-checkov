@@ -138,3 +138,13 @@ resource "aws_instance" "web" {
     http_tokens = "required"
   }
 }
+
+# INSECURE CONFIGURATION - untuk pengujian CI/CD
+resource "aws_s3_bucket" "insecure_test" {
+  bucket = "my-company-public-test-bucket-2026"
+}
+
+resource "aws_s3_bucket_acl" "insecure_test_acl" {
+  bucket = aws_s3_bucket.insecure_test.id
+  acl    = "public-read"
+}
